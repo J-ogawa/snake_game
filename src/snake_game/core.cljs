@@ -74,7 +74,7 @@
         (assoc     :point (rand-nth (free-positions snake board))))
     db))
 
-(defn collisions
+(defn collision?
   [{[head & rbody] :body direction :direction} [x y]]
   (let [[future-x future-y :as future_] (map + direction head)]
     (or (contains? `#{~x -1} future-x)
@@ -92,7 +92,7 @@
   (fn
     [{:keys [snake board game-running? step points] :as db} _]
     (if game-running?
-      (if (collisions snake board)
+      (if (collision? snake board)
         (assoc-in db [:game-running?] false)
         (-> db
             (update-in [:step] inc)
