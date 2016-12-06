@@ -75,10 +75,10 @@
     db))
 
 (defn collision?
-  [{[head & rbody] :body direction :direction} [x y]]
+  [{[head & rbody] :body direction :direction} [x-size y-size]]
   (let [[future-x future-y :as future_] (map + direction head)]
-    (or (contains? `#{~x -1} future-x)
-        (contains? `#{~y -1} future-y)
+    (or (contains? `#{~x-size -1} future-x)
+        (contains? `#{~y-size -1} future-y)
         (contains? `#{~@rbody} future_))))
 
 (register-handler
